@@ -131,7 +131,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Context\AplicationDBContext.cs" />
     <Compile Include="Context\AplicationInitializer.CS" />
+    <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TransportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -278,6 +280,16 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Transport\Create.cshtml" />
+    <Content Include="Views\Transport\Delete.cshtml" />
+    <Content Include="Views\Transport\Details.cshtml" />
+    <Content Include="Views\Transport\Edit.cshtml" />
+    <Content Include="Views\Transport\Index.cshtml" />
+    <Content Include="Views\Flight\Create.cshtml" />
+    <Content Include="Views\Flight\Delete.cshtml" />
+    <Content Include="Views\Flight\Details.cshtml" />
+    <Content Include="Views\Flight\Edit.cshtml" />
+    <Content Include="Views\Flight\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

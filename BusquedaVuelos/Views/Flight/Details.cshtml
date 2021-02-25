@@ -1,0 +1,66 @@
+﻿@model BusquedaVuelos.Models.Flight
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Transport.FlightNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transport.FlightNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Currency)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
