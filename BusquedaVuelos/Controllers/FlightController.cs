@@ -4,22 +4,57 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BusquedaVuelos.Context;
 using BusquedaVuelos.Models;
+using BusquedaVuelos.Repository.IRepository;
+using Newtonsoft.Json;
 
 namespace BusquedaVuelos.Controllers
 {
     public class FlightController : Controller
     {
+        private readonly IFlightRepositorio _flightRepositorio;
         private AplicationDBContext db = new AplicationDBContext();
 
-        // GET: Flight
-        public ActionResult Index()
+        private const string BaseUrl = "http://testapi.vivaair.com/otatest/api/values";
+
+        public FlightController()
         {
-            var flights = db.Flights.Include(f => f.Transport);
-            return View(flights.ToList());
+            this._flightRepositorio = new FlightRepositorio(new AplicationDBContext());
+        }
+
+        // GET: Flight
+        public async Task<ActionResult> Index(string OrigenString, string DestinoString)
+        {
+            try
+            {
+                //List<Flight> flights = new List<Flight>();
+                //var flights = db.Flights.Include(f => f.Transport);
+                if (!String.IsNullOrEmpty(OrigenString) || !String.IsNullOrEmpty(DestinoString))
+                {
+                    List<Flight> flights = await _flightRepositorio.GetFlightByOrigenAndDestino(OrigenString, DestinoString);
+                    //flights = flights.Where(s => s.DepartureStation.Contains(OrigenString)
+                    //                       || s.ArrivalStation.Contains(DestinoString));
+
+                    //lights = flights.OrderBy(s => s.DepartureStation);
+                    return View(flights.ToList().OrderBy(f => f.DepartureStation));
+                }
+                else
+                {
+                    var flights = db.Flights.Include(f => f.Transport);
+                    return View(flights.ToList().OrderBy(f => f.DepartureStation));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         // GET: Flight/Details/5
@@ -129,5 +164,43 @@ namespace BusquedaVuelos.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public async Task<ActionResult> IndexApi()
+        {
+            try
+            {
+                List<Flight> infoFlights = new List<Flight>();
+                Response response = new Response()
+                {
+                    Origin = "BOG",
+                    Destination = "CTG",
+                    From = "2020-08-20"
+                };
+
+                StringContent JSONResult = new StringContent(JsonConvert.SerializeObject(response), Encoding.UTF8, "application/json");
+                string JSONGenerado = await JSONResult.ReadAsStringAsync();
+
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(BaseUrl);
+                    cliente.DefaultRequestHeaders.Clear();
+                    cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage res = await cliente.PostAsJsonAsync(BaseUrl,JSONGenerado);
+                    if (res.IsSuccessStatusCode)
+                    {
+                        var flightResponse = res.Content.ReadAsStringAsync().Result;
+                        infoFlights = JsonConvert.DeserializeObject<List<Flight>>(flightResponse);
+                    }
+
+                    return View(infoFlights);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

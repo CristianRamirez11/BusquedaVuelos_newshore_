@@ -1,0 +1,14 @@
+﻿@model IEnumerable<BusquedaVuelos.Models.Flight>
+@{
+    ViewBag.Title = "BucarVuelos";
+}
+
+<h2>BucarVuelos</h2>
+@using (Html.BeginForm())
+{
+<p>
+    Origen: @Html.TextBox("Origen")
+    Destino: @Html.TextBox("Destino")
+    <input type="submit" value="Buscar Vuelos" />
+</p>
+}
