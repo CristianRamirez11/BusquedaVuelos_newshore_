@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BusquedaVuelos.Models.Flight>
+
+@{
+    ViewBag.Title = "IndexApi";
+}
+
+<h2>IndexApi</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Transport.FlightNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transport.FlightNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
