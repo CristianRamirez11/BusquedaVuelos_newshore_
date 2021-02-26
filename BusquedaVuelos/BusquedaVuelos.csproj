@@ -326,7 +326,6 @@
     <Content Include="Views\Flight\Details.cshtml" />
     <Content Include="Views\Flight\Edit.cshtml" />
     <Content Include="Views\Flight\Index.cshtml" />
-    <Content Include="Views\Home\BucarVuelos.cshtml" />
     <Content Include="Views\Flight\IndexApi.cshtml" />
   </ItemGroup>
   <ItemGroup>

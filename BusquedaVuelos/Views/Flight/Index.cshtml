@@ -4,16 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de Vuelos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo", "Create")
 </p>
 @using (Html.BeginForm("Index", "Flight", FormMethod.Get))
 {
 <p>
-    Find by name: @Html.TextBox("OrigenString", ViewBag.CurrentFilter as string)
-    Find by name: @Html.TextBox("DestinoString", ViewBag.CurrentFilter as string)
+    Origen: @Html.TextBox("OrigenString", ViewBag.CurrentFilter as string)
+    Destino: @Html.TextBox("DestinoString", ViewBag.CurrentFilter as string)
     <input type="submit" value="Buscar Vuelos" />
 </p>
 }
@@ -62,9 +62,9 @@
                 @Html.DisplayFor(modelItem => item.Currency)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

@@ -6,6 +6,9 @@ using System.Web;
 
 namespace BusquedaVuelos.Models
 {
+    /// <summary>
+    /// Clase que representa los vuelos disponibles en el sistema
+    /// </summary>
     public class Flight
     {
         [Key]

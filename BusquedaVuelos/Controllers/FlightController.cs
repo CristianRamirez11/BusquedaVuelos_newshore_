@@ -34,15 +34,9 @@ namespace BusquedaVuelos.Controllers
         {
             try
             {
-                //List<Flight> flights = new List<Flight>();
-                //var flights = db.Flights.Include(f => f.Transport);
                 if (!String.IsNullOrEmpty(OrigenString) || !String.IsNullOrEmpty(DestinoString))
                 {
                     List<Flight> flights = await _flightRepositorio.GetFlightByOrigenAndDestino(OrigenString, DestinoString);
-                    //flights = flights.Where(s => s.DepartureStation.Contains(OrigenString)
-                    //                       || s.ArrivalStation.Contains(DestinoString));
-
-                    //lights = flights.OrderBy(s => s.DepartureStation);
                     return View(flights.ToList().OrderBy(f => f.DepartureStation));
                 }
                 else
@@ -165,6 +159,10 @@ namespace BusquedaVuelos.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Servicio para consumir el API y consultar los vuelos
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> IndexApi()
         {
             try
